@@ -14,8 +14,13 @@ public class Hero {
 	private int maxLife;
 	private int currLife;
 
+	/**
+	 * 构造方法：
+	 * 1、方法名和类名一致
+	 * 2、没有返回值
+	 */
 	public Hero() {
-		System.out.println("父类默认构造！");
+		//System.out.println("父类默认构造！");
 	}
 	
 	public Hero(String nickName, int level, int maxLife, int currLife) {
@@ -26,6 +31,28 @@ public class Hero {
 		this.currLife = currLife;
 	}
 	
+	public int compareToByName(Hero hero){
+		return getNickName().compareTo(hero.getNickName());
+	}
+	
+	/**
+	 * 比较当前英雄对象和传入的英雄对象的大小相等
+	 * @param hero 要比较的英雄对象
+	 * @return
+	 */
+	public int compareTo(Hero hero){
+		//只比较级别
+		if(this.level > hero.getLevel()) 
+			return 1;
+		else if(this.level == hero.getLevel()) 
+			return 0;
+		else 
+			return -1;
+	}
+	
+	/**
+	 * 父类方法：英雄的移动
+	 */
 	public void move(){
 		System.out.println("Hero类的move方法");
 	}

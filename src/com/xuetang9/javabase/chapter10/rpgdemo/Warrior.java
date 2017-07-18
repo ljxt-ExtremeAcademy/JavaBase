@@ -9,15 +9,28 @@ package com.xuetang9.javabase.chapter10.rpgdemo;
  *
  */
 public class Warrior extends Hero{
+	/** 战士类的静态属性，每实例化一个新的展示对象，ID++ */
+	public static int ID = 1;
+	
 	/** 战士的特有属性：物理攻击力 */
 	private int pysicalAttach;
 	
+	/**
+	 * 子类的构造
+	 */
 	public Warrior(){
 		super();	//子类构造中，默认就会调用父类构造
-		System.out.println("子类默认构造");
+		//System.out.println("子类默认构造");
+		setNickName("默认战士" + ID);
+		setLevel(1);
+		setMaxLife(100);
+		setCurrLife(100);
+		setPysicalAttach(99);
+		ID++;
 	}
 	
 	public Warrior(String nickName, int pysicalAttach){
+		this();
 		setNickName(nickName);
 		setPysicalAttach(pysicalAttach);
 	}
@@ -26,6 +39,8 @@ public class Warrior extends Hero{
 	public void move() {
 		System.out.println("战士的移动：交通基本靠走！");
 	}
+	
+	
 	
 	/**
 	 * 重写Object类的equals方法，以便比较两个对象是否相等
@@ -46,8 +61,17 @@ public class Warrior extends Hero{
 	
 	@Override
 	public String toString() {
-		
-		return getNickName() + "\t" + getLevel() + "\t" + getPysicalAttack();
+		StringBuffer str = new StringBuffer();
+		str.append(getLevel());
+		str.append("\t");
+		str.append(getNickName());
+		str.append("\t");
+		str.append(getMaxLife());
+		str.append("\t\t");
+		str.append(getCurrLife());
+		str.append("\t");
+		str.append(getPysicalAttack());
+		return str.toString();
 	}
 
 //	public void movee(){
