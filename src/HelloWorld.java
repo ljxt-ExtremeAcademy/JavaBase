@@ -16,6 +16,9 @@ public class HelloWorld {
 	 * ¶àÐÐ×¢ÊÍ
 	 */
 	public static void main(String[] args) {
+		
+		
+		
 		Scanner input = new Scanner(System.in);
 		
 		//int i = input.nextInt();
@@ -26,16 +29,6 @@ public class HelloWorld {
 		
 		System.out.println(str1);
 		System.out.println(str2);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }
+

@@ -30,7 +30,7 @@ public class StaticDemo {
 		return me;
 	}
 	
-	//静态属性/方式是先于类的实例存在的
+	//静态属性/方法是先于类的实例存在的
 	public static int static_number = 1;
 	
 	
