@@ -1,5 +1,13 @@
 package com.xuetang9.javabase.chapter11.modeldemo;
-
+/**
+ * 远程攻击英雄
+ * @author 老九学堂·窖头
+ * @version 1.0
+ * @date 2017年8月5日 下午2:05:59
+ * @copyright 老九学堂
+ * @remarks TODO
+ *
+ */
 public abstract class LongRangeHero extends Hero{
 	private int attackRange;	//攻击距离
 	

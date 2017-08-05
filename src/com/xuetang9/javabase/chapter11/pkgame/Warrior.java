@@ -1,4 +1,4 @@
-package com.xuetang9.javabase.chapter11.modeldemo;
+package com.xuetang9.javabase.chapter11.pkgame;
 /**
  * 战士类
  * @author 老九学堂·窖头
@@ -21,14 +21,14 @@ public class Warrior extends Hero{
 	}
 		
 	@Override
-	public boolean canFightByDistance(Hero hero) {
+	public boolean canFightByDistance(Assailable hero) {
 		double distance = getDistance(getX(), getY(), hero.getX(), hero.getY());
 		//假设战士的攻击距离固定为100
 		return distance <= 100;
 	}
 
 	@Override
-	public void fight(Hero hero) {
+	public void fight(Assailable hero) {
 		//1.生成随机的攻击力
 		//2.减掉传入英雄对象的hp
 		int attack = ((int)(Math.random() * 1000)) % 51 + 20;//20-70之间
