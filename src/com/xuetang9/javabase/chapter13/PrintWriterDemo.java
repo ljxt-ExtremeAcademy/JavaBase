@@ -19,33 +19,40 @@ import java.util.Scanner;
 public class PrintWriterDemo {
 	static final String FilePath = "src/com/xuetang9/javabase/chapter13/FileDemo1.java";
 	public static void main(String[] args) {
-		//补充：关于Java中的分隔符  windows - \r\n   
-		String separator = System.getProperty("line.separator");//获得系统默认的分隔符 - 固定写法
-		String content = "package com.xuetang9.javabase.chapter13;" + separator;
-		content += "public class FileDemo1{" + separator;
-		content += "\tpublic static void main(String[] args){" + separator;
-		content += "\t\tSystem.out.println(\"HelloWorld!\");" + separator;
-		content += "\t}" + separator;
-		content += "}";
-				
-		try(PrintWriter writer = new PrintWriter(new File(FilePath))){
-			writer.write(content);
-			System.out.println("写入成功！");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
 		
-		try(Scanner input = new Scanner(new File(FilePath))){
-			StringBuffer value = new StringBuffer();
-			while(input.hasNextLine()){
-				value.append(input.nextLine());
-				value.append(separator);
-			}
-			System.out.println("以下是从文件中读取出的内容：");
-			System.out.println(value.toString());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		PrintWriter writer1 = new PrintWriter(System.out);
+		writer1.println("使用PrintWriter打印出的内容！");
+		writer1.flush();
+		writer1.close();
+//		//补充：关于Java中的分隔符  windows - \r\n   
+//		String separator = System.getProperty("line.separator");//获得系统默认的分隔符 - 固定写法
+//		String content = "package com.xuetang9.javabase.chapter13;" + separator;
+//		content += "public class FileDemo1{" + separator;
+//		content += "\tpublic static void main(String[] args){" + separator;
+//		content += "\t\tSystem.out.println(\"HelloWorld!\");" + separator;
+//		content += "\t}" + separator;
+//		content += "}";
+//		
+//		
+//		
+//		try(PrintWriter writer = new PrintWriter(new File(FilePath))){
+//			writer.write(content);
+//			System.out.println("写入成功！");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		try(Scanner input = new Scanner(new File(FilePath))){
+//			StringBuffer value = new StringBuffer();
+//			while(input.hasNextLine()){
+//				value.append(input.nextLine());
+//				value.append(separator);
+//			}
+//			System.out.println("以下是从文件中读取出的内容：");
+//			System.out.println(value.toString());
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
