@@ -14,7 +14,14 @@ import java.util.ListIterator;
  *
  */
 public class CollectionDemo {
-
+	/**
+	 * 集合使用建议：
+	 * ArrayList/LinkedList/ArrayDeque/HashSet/LinkedHashSet/TreeSet
+	 * 1、如果要遍历List结合，对于ArrayList、Vector来说，使用随遍历（get)效率更高；对于LinkedList/LinkHashSet来说，使用迭代器效率更高
+	 * 2、如果需要经常执行插入、删除操作来改变包含大量数据的集合大小，建议使用LinkedList。（ArrayList、Vector可能需要重新分配内部数组的大小，从而影响效率）
+	 * 3、如果有多个线程需要同时访问集合中的元素，可以考虑使用Collectons将集合包装成线程安全的集合
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		//多态：使用List接口的一个子类ArrayList进行实现
 		List<String> list1 = new ArrayList<>();
