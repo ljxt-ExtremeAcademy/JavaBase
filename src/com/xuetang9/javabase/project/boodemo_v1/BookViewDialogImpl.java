@@ -1,83 +1,63 @@
 package project.bookdemo;
 
-import java.util.Scanner;
+import javax.swing.*;
 
 /**
  * @Author WangHaojie
- * @Description 图书管理系统界面控制台的实现类
- * @Date Created in 2020/10/24 22:03
+ * @Description 使用对话框升级的图形界面
+ * @Date Created in 2020/10/24 22:14
  */
-public class BookViewConsoleImpl extends AbstractBookView {
-    private Scanner input = null;
+public class BookViewDialogImpl extends AbstractBookView {
     private BookBiz bookBiz = null;
 
-    public BookViewConsoleImpl() {
-        input = new Scanner(System.in);
+    public BookViewDialogImpl() {
         bookBiz = new BookBiz();
-
-        System.out.println("*********************************");
-        System.out.println("\t欢迎使用图书管理系统");
-        System.out.println("\t1、登录\t\t2、退出系统");
-        System.out.println("*********************************");
-        System.out.print("请选择：");
-        String choice = input.next();
-        if("1".equals(choice)){
-            //执行登录操作
-            //如果验证成功，就显示主菜单
-            System.out.println("登录功能暂未实现，默认已登录\n");
-            doMainView();
-        }
-        System.out.println("图书系统已成功退出，欢迎再次使用！");
     }
 
     @Override
     public String showMainView() {
-        System.out.println("\n图书管理系统 >> 主菜单");
-        System.out.println("1、新增图书\t2、删除图书\t3、查看所有图书\t4、按编号查询\t5、入库\t6、出库\t7、退出");
-        System.out.print("请选择：");
-        String choice = input.next();
-        return choice;
+        String strMenu = "\n图书管理系统 >> 主菜单\n";
+        strMenu += "1、新增图书\t2、删除图书\t3、查看所有图书\t4、按编号查询\t5、入库\t6、出库\t7、退出\n";
+        strMenu += "请选择：";
+        String result = JOptionPane.showInputDialog(strMenu);  //显示输入对话框
+        if (result == null) result = "7";  //用户点击了取消按钮
+        return result;
     }
 
     @Override
     public void showOutStore() {
-        System.out.println("\n图书管理系统 >> 图书出库");
-        System.out.print("出库的图书编号：");
-        String bookId = input.next();
-        System.out.print("出库的数量：");
-        int bookCount = input.nextInt();
-        if(bookBiz.outStore(bookId, bookCount)){
-            System.out.println("出库成功！");
+        JOptionPane.showMessageDialog(null, "图书管理系统 >> 图书出库");
+        String bookId = JOptionPane.showInputDialog("请输入出库图书编号：");
+        int bookCount = Integer.parseInt(JOptionPane.showInputDialog("出库图书的数量："));
+        if (bookBiz.outStore(bookId, bookCount)) {
+            JOptionPane.showMessageDialog(null, "出库成功！");
             showBooks(null);
-        }else{
-            System.out.println("出库失败，请检查输入的图书编号或出库数量是否超限！");
+        } else {
+            JOptionPane.showMessageDialog(null, "出库失败，请检查输入的图书编号或出库数量是否超限！");
         }
     }
 
     @Override
     public void showInStore() {
         //入库需要两个参数：图书id，入库的数量
-        System.out.println("\n图书管理系统 >> 图书入库");
-        System.out.print("入库的图书编号：");
-        String bookId = input.next();
-        System.out.print("入库的数量：");
-        int bookCount = input.nextInt();
-        if(bookBiz.inStore(bookId, bookCount)){
-            System.out.println("入库成功！");
+        JOptionPane.showMessageDialog(null, "图书管理系统 >> 图书入库");
+        String bookId = JOptionPane.showInputDialog("请输入入库图书编号：");
+        int bookCount = Integer.parseInt(JOptionPane.showInputDialog("入库图书的数量："));
+        if (bookBiz.inStore(bookId, bookCount)) {
+            JOptionPane.showMessageDialog(null, "入库成功！");
             showBooks(null);
-        }else{
-            System.out.println("入库失败，请检查输入的图书编号！");
+        } else {
+            JOptionPane.showMessageDialog(null, "入库失败，请检查输入的图书编号！");
         }
     }
 
     @Override
     public void showFindById() {
-        System.out.println("\n图书管理系统 >> 按编号查询");
-        System.out.println("请输入要查询的图书编号：");
-        String bookId = input.next();
+        JOptionPane.showMessageDialog(null, "图书管理系统 >> 按编号查询");
+        String bookId = JOptionPane.showInputDialog("请输入要查询的图书编号：");
         Book book = bookBiz.findById(bookId);
-        if(book == null){
-            System.out.println("没有找到任何的图书信息！");
+        if (book == null) {
+            JOptionPane.showMessageDialog(null, "没有找到任何的图书信息！");
             return;
         }
         showBooks(book);
@@ -85,53 +65,53 @@ public class BookViewConsoleImpl extends AbstractBookView {
 
     @Override
     public void showDelBookView() {
-        System.out.println("\n图书管理系统 >> 删除图书");
+        JOptionPane.showMessageDialog(null, "图书管理系统 >> 删除图书");
         //暂时只实现根据id删除
-        System.out.print("请输入要删除的图书编号：");
-        String delId = input.next();
+        String delId = JOptionPane.showInputDialog("请输入要删除的图书编号：");
         Book delBook = new Book();
         delBook.setBookId(delId);
-        if(bookBiz.delBook(delBook)){//如果删除成功
-            System.out.println("删除成功！");
-            showBooks(null);	//打印默认的图书仓库，相当于刷新显示当前图书仓库中的内容
-        }else{//删除失败
-            System.out.println("删除失败！");
+        if (bookBiz.delBook(delBook)) {//如果删除成功
+            JOptionPane.showMessageDialog(null, "删除成功！");
+            showBooks(null);    //打印默认的图书仓库，相当于刷新显示当前图书仓库中的内容
+        } else {//删除失败
+            JOptionPane.showMessageDialog(null, "删除失败！");
         }
     }
 
     @Override
     public Book showAddNewBookView() {
-        System.out.println("\n图书管理系统 >> 新增图书");
-        System.out.print("内部编号：");
-        String bookId = input.next();
-        //这里需要验证用户输入的编号是否存在
-        Book newBook = bookBiz.findById(bookId);
-        if(newBook == null){//可以添加图书
-            newBook = new Book();
-            newBook.setBookId(bookId);
-            System.out.print("名称：");
-            newBook.setBookName(input.next());
-            System.out.print("库存：");
-            newBook.setCount(input.nextInt());
-            //...........
-            bookBiz.addBook(newBook);//调用图书业务对象，将新增的图书对象添加到图书仓库中
-        }else{//图书已存在
-            System.out.println("此内部编号已存在，请重新录入！");
-            newBook = showAddNewBookView();	//重新调用本方法，让用户再次输入 - 递归调用
+        Book newBook = new Book();
+        String bookId = null;
+        String bookName = null;
+        int count = -1;
+        //注意：这里的三个变量输入时需要验证用户输入数据的合法性
+        bookId = JOptionPane.showInputDialog("请输入图书编号：");
+        bookName = JOptionPane.showInputDialog("图书名称：");
+        count = Integer.parseInt(JOptionPane.showInputDialog("库存量："));
+
+        newBook.setBookId(bookId);
+        newBook.setBookName(bookName);
+        newBook.setCount(count);
+        if (bookBiz.addBook(newBook)) {
+            JOptionPane.showMessageDialog(null, "添加成功！");
+        } else {
+            JOptionPane.showMessageDialog(null, "添加失败！");
         }
         return newBook;
     }
 
     @Override
     public void showBooks(Book... bookArray) {
-        System.out.println("内部编号\t名称\t库存");
-        if(bookArray == null){
+        StringBuffer strBooks= new StringBuffer("内部编号\t名称\t库存\n");
+        if (bookArray == null) {
             bookArray = Datas.BookStore;
         }
         int bookCount = bookBiz.getBookCount(bookArray);
-        for(int i = 0; i < bookCount; i++){
-            System.out.printf("%s\t\t%s\t%d\n",
-                    bookArray[i].getBookId(), bookArray[i].getBookName(), bookArray[i].getCount());
+        for (int i = 0; i < bookCount; i++) {
+            strBooks.append(bookArray[i].getBookId()).append("\t")
+                    .append(bookArray[i].getBookName()).append("\t")
+                    .append(bookArray[i].getCount()).append("\n");
         }
+        JOptionPane.showMessageDialog(null, strBooks);
     }
 }
